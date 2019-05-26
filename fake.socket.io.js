@@ -17,7 +17,6 @@ module.exports = function (subprocess) {
     this.map = {};
     this.on = (name, callback) => { this.map[name] ? this.map[name].push(callback) : this.map[name] = [callback]; };
     subprocess.on("message", (data) => {
-        console.log(data);
         if (data.connect) {
             socketMap[data.connect] = new Socket(data.connect, subprocess);
             this.map["connection"].forEach(cb => cb(socketMap[data.connect]));
